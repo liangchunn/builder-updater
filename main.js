@@ -84,7 +84,7 @@ autoUpdater.on('download-progress', (progressObj) => {
     sendStatusToWindow(log_message);
 })
 autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded; will install in 5 seconds');
+    sendStatusToWindow('Update downloaded; will restart and install in 5 seconds');
 });
 app.on('ready', function() {
     // Create the Menu
@@ -115,6 +115,7 @@ app.on('window-all-closed', () => {
 // autoUpdater.on('update-not-available', (info) => {
 // })
 // autoUpdater.on('error', (err) => {
+//     log.info("Something went wrong:", err.message)
 // })
 // autoUpdater.on('download-progress', (progressObj) => {
 // })
@@ -128,5 +129,7 @@ autoUpdater.on('update-downloaded', (info) => {
 })
 
 app.on('ready', function() {
-    autoUpdater.checkForUpdates();
+    setTimeout(() => {
+      autoUpdater.checkForUpdates();
+    }, 2000);
 });
